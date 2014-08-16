@@ -1,0 +1,28 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio 2013
+VisualStudioVersion = 12.0.30723.0
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tavis.PrivateCache.Sterling", "src\Tavis.PrivateCache.Sterling\Tavis.PrivateCache.Sterling.csproj", "{FF5D54EB-02CC-4808-B49B-78DA4C780A2A}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Tavis.PrivateCache.Sterling.Test", "test\Tavis.PrivateCache.Sterling.Test\Tavis.PrivateCache.Sterling.Test.csproj", "{290C6168-305E-4C6F-BEB6-13C5107D49FC}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{FF5D54EB-02CC-4808-B49B-78DA4C780A2A}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{FF5D54EB-02CC-4808-B49B-78DA4C780A2A}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{FF5D54EB-02CC-4808-B49B-78DA4C780A2A}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{FF5D54EB-02CC-4808-B49B-78DA4C780A2A}.Release|Any CPU.Build.0 = Release|Any CPU
+		{290C6168-305E-4C6F-BEB6-13C5107D49FC}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{290C6168-305E-4C6F-BEB6-13C5107D49FC}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{290C6168-305E-4C6F-BEB6-13C5107D49FC}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{290C6168-305E-4C6F-BEB6-13C5107D49FC}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal
