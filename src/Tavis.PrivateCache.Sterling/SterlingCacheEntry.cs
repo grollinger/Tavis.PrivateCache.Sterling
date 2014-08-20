@@ -17,11 +17,15 @@
             set { VaryHeaders = value; }
         }
 
-        public SterlingCacheEntry(PrimaryCacheKey key, IEnumerable<string> varyHeaders) 
+        public SterlingCacheEntry(PrimaryCacheKey key, IEnumerable<string> varyHeaders)
             : base(key, varyHeaders) { }
 
         public SterlingCacheEntry()
-            : base(null, null)
+        {
+        }
+
+        public SterlingCacheEntry(CacheEntry cacheEntry)
+            : base(cacheEntry.Key, cacheEntry.VaryHeaders)
         {
         }
     }

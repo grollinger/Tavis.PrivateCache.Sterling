@@ -9,7 +9,7 @@
             var engine = new SterlingEngine(new SterlingPlatformAdapter());
             engine.SterlingDatabase.RegisterSerializer<SterlingContentSerializer>();
             engine.Activate();
-            return engine.SterlingDatabase.RegisterDatabase<ContentStoreDB>("TestDB", new MemoryDriver());        
+            return engine.SterlingDatabase.RegisterDatabase<ContentStoreDB>("TestDB", new MemoryDriver());
         }
     }
 }
