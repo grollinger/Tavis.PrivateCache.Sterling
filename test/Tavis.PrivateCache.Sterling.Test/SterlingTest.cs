@@ -57,7 +57,7 @@
             // Assert
             Assert.NotNull(objKey);
             Assert.NotNull(restored);
-            Assert.Equal(restored.Key, entry.Key);
+            Assert.Equal(restored.PrimaryKey, entry.PrimaryKey);
             Assert.Empty(restored.VaryHeaders);
         }
     }

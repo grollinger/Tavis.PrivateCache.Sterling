@@ -62,41 +62,41 @@
 
         public static async Task<SterlingCacheContent> CreateAsync(CacheContent content)
         {
-            Contract.Requires<ArgumentException>(content.CacheEntry != null, "content");
-            Contract.Requires<ArgumentException>(!string.IsNullOrEmpty(content.Key), "content");
+            Contract.Requires<ArgumentException>(content.PrimaryKey != null, "content");
+            Contract.Requires<ArgumentException>(content.ContentKey != null, "content");
             Contract.Requires<ArgumentException>(content.Response != null, "content");
 
             var sterlingContent = new SterlingCacheContent();
 
-            if (content.CacheEntry is SterlingCacheEntry)
-            {
-                sterlingContent.CacheEntry = content.CacheEntry as SterlingCacheEntry;
-            }
-            else
-            {
-                sterlingContent.CacheEntry = new SterlingCacheEntry(content.CacheEntry);
-            }
+            //if (content.CacheEntry is SterlingCacheEntry)
+            //{
+            //    sterlingContent.CacheEntry = content.CacheEntry as SterlingCacheEntry;
+            //}
+            //else
+            //{
+            //    sterlingContent.CacheEntry = new SterlingCacheEntry(content.CacheEntry);
+            //}
 
-            sterlingContent.Key = content.Key;
+            //sterlingContent.Key = content.Key;
 
-            var response = content.Response;
+            //var response = content.Response;
 
-            sterlingContent.StatusCode = response.StatusCode;
+            //sterlingContent.StatusCode = response.StatusCode;
 
-            foreach (var keyValue in response.Headers)
-            {
-                sterlingContent.ResponseHeaders.Add(keyValue.Key, keyValue.Value);
-            }
+            //foreach (var keyValue in response.Headers)
+            //{
+            //    sterlingContent.ResponseHeaders.Add(keyValue.Key, keyValue.Value);
+            //}
 
-            if (response.Content != null)
-            {
-                foreach (var keyValue in response.Content.Headers)
-                {
-                    sterlingContent.ContentHeaders.Add(keyValue.Key, keyValue.Value);
-                }
+            //if (response.Content != null)
+            //{
+            //    foreach (var keyValue in response.Content.Headers)
+            //    {
+            //        sterlingContent.ContentHeaders.Add(keyValue.Key, keyValue.Value);
+            //    }
 
-                sterlingContent.Content = await response.Content.ReadAsByteArrayAsync();
-            }
+            //    sterlingContent.Content = await response.Content.ReadAsByteArrayAsync();
+            //}
 
             return sterlingContent;
         }

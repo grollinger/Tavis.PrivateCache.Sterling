@@ -13,8 +13,8 @@
         {
             return new List<ITableDefinition>()
             {
-                CreateTableDefinition<SterlingCacheEntry, string>(x => x.Key.ToString()),
-                CreateTableDefinition<SterlingCacheContent, string>(x => string.Format("{0}->{1}", x.CacheEntry.Key.ToString(), x.Key.ToString()))
+                CreateTableDefinition<SterlingCacheEntry, string>(x => x.PrimaryKey.ToString()),
+                CreateTableDefinition<SterlingCacheContent, string>(x => string.Format("{0}->{1}", x.CacheEntry.PrimaryKey.ToString(), x.Key.ToString()))
             };
         }
     }

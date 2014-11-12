@@ -4,6 +4,7 @@
     using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using System.Linq;
+    using System.Net.Http;
     using System.Net.Http.Headers;
 
     /// <summary>
@@ -104,6 +105,63 @@
         }
 
         public int GetHashCode(HttpHeaders obj)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    /// <summary>
+    /// Implements equality comparison for <see cref="HttpContent"/>.
+    /// Contents are considered equal, if their headers are equal and they are the same, when converted to a string.
+    /// </summary>
+    public class HttpContentComparer : IEqualityComparer<HttpContent>
+    {
+        static readonly IEqualityComparer<HttpHeaders> HeaderComparer = new HttpHeadersComparer();
+
+        public bool Equals(HttpContent x, HttpContent y)
+        {
+            if (x == null || y == null)
+            {
+                return x == null && y == null;
+            }
+
+            var xString = x.ReadAsStringAsync().Result;
+            var yString = y.ReadAsStringAsync().Result;
+
+            return xString == yString
+                && HeaderComparer.Equals(x.Headers, y.Headers);
+        }
+
+        public int GetHashCode(HttpContent obj)
+        {
+            throw new NotImplementedException();
+        }
+    }
+
+    /// <summary>
+    /// Implements equality comparison for <see cref="HttpResponseMessage"/>.
+    /// Messages are considered equal, if their status, headers, and contents match.
+    /// </summary>
+    public class HttpReponseMessageComparer : IEqualityComparer<HttpResponseMessage>
+    {
+        static readonly IEqualityComparer<HttpHeaders> HeaderComparer = new HttpHeadersComparer();
+        static readonly IEqualityComparer<HttpContent> ContentComparer = new HttpContentComparer();
+
+        public bool Equals(HttpResponseMessage x, HttpResponseMessage y)
+        {
+            if(x == null || y == null)
+            {
+                return x == null && y == null;
+            }
+
+            var status = x.StatusCode == y.StatusCode;
+            var headers = HeaderComparer.Equals(x.Headers, y.Headers);
+            var content = ContentComparer.Equals(x.Content, y.Content);
+
+            return status && headers && content;
+        }
+
+        public int GetHashCode(HttpResponseMessage obj)
         {
             throw new NotImplementedException();
         }

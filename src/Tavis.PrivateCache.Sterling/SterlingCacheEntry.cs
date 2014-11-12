@@ -8,8 +8,8 @@
     {
         public PrimaryCacheKey StoreKey
         {
-            get { return Key; }
-            set { Key = value; }
+            get { return PrimaryKey; }
+            set { PrimaryKey = value; }
         }
         public IEnumerable<string> StoreVaryHeaders
         {
@@ -25,7 +25,7 @@
         }
 
         public SterlingCacheEntry(CacheEntry cacheEntry)
-            : base(cacheEntry.Key, cacheEntry.VaryHeaders)
+            : base(cacheEntry.PrimaryKey, cacheEntry.VaryHeaders)
         {
         }
     }

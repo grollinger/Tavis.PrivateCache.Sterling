@@ -1,6 +1,7 @@
 ﻿namespace Tavis.PrivateCache.Sterling
 {
     using System;
+    using System.Collections.Generic;
     using System.Diagnostics.Contracts;
     using System.Threading.Tasks;
     using Wintellect.Sterling.Core;
@@ -17,12 +18,17 @@
             Instance = db.RegisterDatabase<ContentStoreDB>("ContentStore", driver);
         }
 
-        public async Task<CacheEntry> GetEntryAsync(PrimaryCacheKey cacheKey)
+        public async Task<CacheEntry> GetEntryAsync(PrimaryCacheKey primaryKey, CacheEntryKey entryKey)
         {
-            return await Instance.LoadAsync<SterlingCacheEntry>(cacheKey);
+            return null;
         }
 
-        public Task<CacheContent> GetContentAsync(CacheEntry entry, string secondaryKey)
+        public Task<IEnumerable<CacheEntry>> GetEntriesAsync(PrimaryCacheKey primaryKey)
+        {
+            throw new NotImplementedException();
+        }
+
+        public Task<ICacheContent> GetContentAsync(PrimaryCacheKey primaryKey, CacheContentKey contentKey)
         {
             throw new NotImplementedException();
         }

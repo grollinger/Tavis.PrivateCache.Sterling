@@ -11,7 +11,7 @@
     public class SterlingCacheContentTest
     {
         PrimaryCacheKey primaryKey;
-        string secondaryKey;
+        CacheContentKey secondaryKey;
         CacheEntry entry;
         HttpResponseMessage response;
         CacheContent content;
@@ -19,7 +19,7 @@
         public SterlingCacheContentTest()
         {
             primaryKey = new PrimaryCacheKey("https://localhost/test", "POST");
-            secondaryKey = "secondary";
+            secondaryKey = TestHelper.CreateContentKey();
             entry = new CacheEntry(primaryKey, new string[0]);
             response = new HttpResponseMessage(HttpStatusCode.BadRequest)
             {
@@ -35,8 +35,8 @@
 
             content = new CacheContent()
             {
-                Key = secondaryKey,
-                CacheEntry = entry,
+                PrimaryKey = primaryKey,
+                ContentKey = secondaryKey,
                 Response = response
             };
         }
@@ -63,7 +63,7 @@
 
             // Assert
             Assert.NotNull(sterlingContent);
-            Assert.Equal(primaryKey, sterlingContent.CacheEntry.Key);
+            Assert.Equal(primaryKey, sterlingContent.CacheEntry.PrimaryKey);
             var restoredResponse = sterlingContent.Response;
             AssertCorrectReconstruction(restoredResponse);
         }
@@ -73,14 +73,14 @@
         {
             // Arrange
             var primaryKey = new PrimaryCacheKey("https://localhost/test", "POST");
-            var secondaryKey = "secondary";
+            var secondaryKey = TestHelper.CreateContentKey();
             var entry = new CacheEntry(primaryKey, new string[0]);
             var response = new HttpResponseMessage();
 
             var content = new CacheContent()
             {
-                Key = secondaryKey,
-                CacheEntry = entry,
+                PrimaryKey = primaryKey,
+                ContentKey = secondaryKey,                
                 Response = response
             };
 
@@ -96,41 +96,32 @@
         {
             // Arrange
             var primaryKey = new PrimaryCacheKey("https://localhost/test", "POST");
-            var secondaryKey = "secondary";
+            var secondaryKey = TestHelper.CreateContentKey();
             var entry = new CacheEntry(primaryKey, new string[0]);
             var response = new HttpResponseMessage();
 
-            var noEntry = new CacheContent()
+            var noPrimary = new CacheContent()
             {
-                Key = secondaryKey,
+                ContentKey = secondaryKey,
                 Response = response
             };
 
-            var noKey = new CacheContent()
+            var noContentKey = new CacheContent()
             {
-                CacheEntry = entry,
-                Response = response
-            };
-
-            var emptyKey = new CacheContent()
-            {
-                CacheEntry = entry,
-                Key = "",
                 Response = response
             };
 
             var noResponse = new CacheContent()
             {
-                Key = secondaryKey,
-                CacheEntry = entry
+                PrimaryKey = primaryKey,
+                ContentKey = secondaryKey,
             };
 
             // Act
 
             // Assert
-            Assert.Throws<ArgumentException>(() => SterlingCacheContent.CreateAsync(noEntry).Result);
-            Assert.Throws<ArgumentException>(() => SterlingCacheContent.CreateAsync(noKey).Result);
-            Assert.Throws<ArgumentException>(() => SterlingCacheContent.CreateAsync(emptyKey).Result);
+            Assert.Throws<ArgumentException>(() => SterlingCacheContent.CreateAsync(noPrimary).Result);
+            Assert.Throws<ArgumentException>(() => SterlingCacheContent.CreateAsync(noContentKey).Result);
             Assert.Throws<ArgumentException>(() => SterlingCacheContent.CreateAsync(noResponse).Result);
         }
 
